@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <title>Water</title>
+</head>
+<style>
+    body {
+        padding: 0;
+        margin: 0;
+
+        background-image: url(rain.mp4);
+    }
+
+    .form-range {
+        width: 80%;
+        margin-left: 20px;
+        text-align: center;
+    }
+
+    .form-label {
+        text-align: left;
+        width: 80%;
+        font-weight: bold;
+        margin-left: 10px;
+    }
+
+    form {
+        margin-top: 0px;
+        margin-left: 10%;
+        margin-right: 10%;
+        width: 500px;
+        height: 600px;
+        background-color: rgba(0, 255, 255, 0.301);
+
+        border-radius: 8px;
+    }
+
+    p {
+        text-align: center;
+
+    }
+
+    .num {
+        background: rgba(4, 234, 250, 0.055);
+        border-radius: 8px;
+        width: 50px;
+        height: 20px;
+        border-color: cyan;
+        color: rgb(67, 38, 197);
+    }
+
+    #myVideo {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+    }
+
+    h3 {
+        text-align: center;
+    }
+
+    #left {
+        padding-top: 15%;
+        margin-top: 0%;
+        margin-left: 50%;
+        text-align: center;
+    }
+
+    #right {
+        width: 50%;
+        height: 100%;
+        float: left;
+        padding: 20px;
+
+        position: fixed;
+
+        border-radius: 5px;
+
+    }
+</style>
+
+<body>
+    <video autoplay muted loop id="myVideo">
+        <source src="{{ url_for('static', filename='rain.mp4') }}" type="video/mp4">
+    </video>
+    <div id="right">
+        <form action="/view" method="POST" enctype="multipart/form-data">
+            <h3>Parameters</h3>
+            &nbsp;<label for="customRange1" class="form-label">Enter ph value</label>&nbsp;&nbsp;
+            <input type="number" class="num" value={{val1}} max="100" min="0" onchange="this.form.submit()" readonly>
+            <input type="range" class="form-range" id="customRange1" max="100" min="0" value={{val1}} name="name"
+                onchange="this.form.submit()">
+            &nbsp;<label for="customRange2" class="form-label">Enter Hardness value</label>&nbsp;&nbsp;
+            <input type="number" class="num" value={{val2}} max="100" min="0" onchange="this.form.submit()" readonly>
+            <input type="range" class="form-range" id="customRange1" max="100" min="0" value={{val2}} name="name1"
+                onchange="this.form.submit()">
+            &nbsp;<label for="customRange3" class="form-label">Enter Solids value</label>&nbsp;&nbsp;
+            <input type="number" class="num" value={{val3}} max="100" min="0" onchange="this.form.submit()" readonly>
+            <input type="range" class="form-range" id="customRange1" max="100" min="0" value={{val3}} name="name2"
+                onchange="this.form.submit()">
+            &nbsp;<label for="customRange4" class="form-label">Enter Chloramines value</label>&nbsp;&nbsp;
+            <input type="number" class="num" value={{val4}} max="100" min="0" onchange="this.form.submit()" readonly>
+            <input type="range" class="form-range" id="customRange1" max="100" min="0" value={{val4}} name="name3"
+                onchange="this.form.submit()">
+            &nbsp;<label for="customRange5" class="form-label">Enter Sulfate value</label>&nbsp;&nbsp;
+            <input type="number" class="num" value={{val5}} max="100" min="0" onchange="this.form.submit()" readonly>
+            <input type="range" class="form-range" id="customRange1" max="100" min="0" value={{val5}} name="name4"
+                onchange="this.form.submit()">
+            &nbsp;<label for="customRange5" class="form-label">Enter Conductivity value</label>&nbsp;&nbsp;
+            <input type="number" class="num" value={{val6}} max="100" min="0" onchange="this.form.submit()" readonly>
+            <input type="range" class="form-range" id="customRange1" max="100" min="0" value={{val6}} name="name5"
+                onchange="this.form.submit()">
+            &nbsp;<label for="customRange5" class="form-label">Enter Organic_carbon value</label>&nbsp;&nbsp;
+            <input type="number" class="num" value={{val7}} max="100" min="0" onchange="this.form.submit()" readonly>
+            <input type="range" class="form-range" id="customRange1" max="100" min="0" value={{val7}} name="name6"
+                onchange="this.form.submit()">
+            &nbsp;<label for="customRange5" class="form-label">Enter Trihalomethanes value</label>&nbsp;&nbsp;
+            <input type="number" class="num" value={{val8}} max="100" min="0" onchange="this.form.submit()" readonly>
+            <input type="range" class="form-range" id="customRange1" max="100" min="0" value={{val8}} name="name7"
+                onchange="this.form.submit()">
+            &nbsp;<label for="customRange5" class="form-label">Enter Turbidity value</label>&nbsp;&nbsp;
+            <input type="number" class="num" value={{val9}} max="100" min="0" onchange="this.form.submit()" readonly>
+            <input type="range" class="form-range" id="customRange1" max="100" min="0" value={{val9}} name="name8"
+                onchange="this.form.submit()">
+            <noscript><input type="submit" value="submit" /></noscript>
+
+        </form>
+    </div>
+    <div id="left">
+        {% if view==1 %}
+        <img src="https://c.tenor.com/_Z1AN0xbLvMAAAAC/drinking-fail.gif" alt="pure" style="border-radius: 5px;">
+        {% endif %}
+        {% if view==0 %}
+        <img src="https://cdn11.bigcommerce.com/s-10c6f/images/stencil/1280x1280/products/25191/43275/LS31524-46__42848.1571249617.jpg?c=2" alt="pure" style="height: 300px; width: 300px; border-radius: 5px;">
+        {% endif %}
+        
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous">
+
+        </script>
+
+</body>
+
+</html>
